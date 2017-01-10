@@ -2,6 +2,7 @@
 using ContosoUniversity.Models;
 using Marvin.JsonPatch;
 using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Http;
 
@@ -42,7 +43,7 @@ namespace ASP.NET.ApiAddits.RESTFul.Controllers
             if (!db.Students.Any(s => s.ID == id)) return NotFound();
 
             student.ID = id;
-            var result = db.Entry(student).State = System.Data.Entity.EntityState.Modified;
+            var result = db.Entry(student).State = EntityState.Modified;
 
             db.SaveChanges();
 
