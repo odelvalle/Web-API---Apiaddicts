@@ -1,0 +1,63 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26020.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASP.NET.ApiAddits.MessagesHandler", "..\ASP.NET.ApiAddits.MessagesHandler\ASP.NET.ApiAddits.MessagesHandler.csproj", "{0A791EB0-E03B-4F6F-B1F3-D5E0E7FF656F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01 Messages Handlers", "01 Messages Handlers", "{B93EB7E4-5848-408B-9036-7475C599A0C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASP.NET.ApiAddits.Commons", "ASP.NET.ApiAddits.Commons\ASP.NET.ApiAddits.Commons.csproj", "{BF376C93-7657-4C59-9EC2-787250256C31}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Commons", "Commons", "{D2786BBC-3276-4967-A58D-7FBECB63B594}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASP.NET.ApiAddits.Filters", "ASP.NET.ApiAddits.Filters\ASP.NET.ApiAddits.Filters.csproj", "{40D48662-C53D-4C5F-8ED6-BBF6C3F27199}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02 Filters", "02 Filters", "{E7BFABA1-F822-437A-8113-D91ABCA3C4D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASP.NET.ApiAddits.BasicContrains", "ASP.NET.ApiAddits.BasicContrains\ASP.NET.ApiAddits.BasicContrains.csproj", "{E299AE19-26AE-4218-A9DC-353E171ABEED}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03 Basic Contrains", "03 Basic Contrains", "{3D3B123E-E34E-496B-98A5-7838A57BFAC5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASP.NET.ApiAddits.RESTFul", "ASP.NET.ApiAddits.RESTFul\ASP.NET.ApiAddits.RESTFul.csproj", "{F020CB35-BC4B-4C0C-BDED-33C54FDBBE4B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04 RESTFul", "04 RESTFul", "{07CAADB1-5ED4-4DBF-BBF1-61FF6B2DCCCF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0A791EB0-E03B-4F6F-B1F3-D5E0E7FF656F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A791EB0-E03B-4F6F-B1F3-D5E0E7FF656F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A791EB0-E03B-4F6F-B1F3-D5E0E7FF656F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A791EB0-E03B-4F6F-B1F3-D5E0E7FF656F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF376C93-7657-4C59-9EC2-787250256C31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF376C93-7657-4C59-9EC2-787250256C31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF376C93-7657-4C59-9EC2-787250256C31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF376C93-7657-4C59-9EC2-787250256C31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40D48662-C53D-4C5F-8ED6-BBF6C3F27199}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40D48662-C53D-4C5F-8ED6-BBF6C3F27199}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40D48662-C53D-4C5F-8ED6-BBF6C3F27199}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40D48662-C53D-4C5F-8ED6-BBF6C3F27199}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E299AE19-26AE-4218-A9DC-353E171ABEED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E299AE19-26AE-4218-A9DC-353E171ABEED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E299AE19-26AE-4218-A9DC-353E171ABEED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E299AE19-26AE-4218-A9DC-353E171ABEED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F020CB35-BC4B-4C0C-BDED-33C54FDBBE4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F020CB35-BC4B-4C0C-BDED-33C54FDBBE4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F020CB35-BC4B-4C0C-BDED-33C54FDBBE4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F020CB35-BC4B-4C0C-BDED-33C54FDBBE4B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0A791EB0-E03B-4F6F-B1F3-D5E0E7FF656F} = {B93EB7E4-5848-408B-9036-7475C599A0C7}
+		{BF376C93-7657-4C59-9EC2-787250256C31} = {D2786BBC-3276-4967-A58D-7FBECB63B594}
+		{40D48662-C53D-4C5F-8ED6-BBF6C3F27199} = {E7BFABA1-F822-437A-8113-D91ABCA3C4D1}
+		{E299AE19-26AE-4218-A9DC-353E171ABEED} = {3D3B123E-E34E-496B-98A5-7838A57BFAC5}
+		{F020CB35-BC4B-4C0C-BDED-33C54FDBBE4B} = {07CAADB1-5ED4-4DBF-BBF1-61FF6B2DCCCF}
+	EndGlobalSection
+EndGlobal
