@@ -1,7 +1,9 @@
 ﻿using ContosoUniversity.DAL;
+using System;
 using System.Linq;
 using System.Web.Http;
 using System.Web.Http.OData;
+using static ASP.NET.ApiAddits.RESTFul.Extensions.HttpActionResultExtensions;
 
 namespace ASP.NET.ApiAddits.RESTFul.Controllers
 {
@@ -14,11 +16,28 @@ namespace ASP.NET.ApiAddits.RESTFul.Controllers
             this.db = new SchoolContext();
         }
 
-        [EnableQuery]
-        public IHttpActionResult Get()
+        public IHttpActionResult Get(UInt16 page = 1, UInt16 pageSize = 5)
         {
-            return Ok(db.Courses.AsQueryable());
+            var courses = db.Courses;
+            var count = db.Courses.Count();
+
+            var response = Ok(courses.OrderBy(c => c.CourseID).Skip(pageSize * (page - 1)).Take(pageSize));
+            return response.AddPagination("DefaultApi", new PageInfo { Page = page, PageSize = pageSize, Count = count });
         }
+
+        //public IHttpActionResult Get(ODataQueryOptions<Course> options)
+        //{
+        //    options.Validate(WebApiConfig.ODataSettings);
+        //    var settings = new ODataQuerySettings()
+        //    {
+        //        PageSize = 2
+        //    };
+
+        //    var courses = db.Courses.AsQueryable();
+        //    var query = (IQueryable<Course>)options.ApplyTo(courses, settings);
+
+        //    return Ok(new PageResult<Course>(query, Request.ODataProperties().NextLink, courses.Count()));
+        //}
 
         public IHttpActionResult Get(int id)
         {
@@ -37,8 +56,8 @@ namespace ASP.NET.ApiAddits.RESTFul.Controllers
                 .SelectMany(c => c.Enrollments)
                 .Where(e => student == null || e.StudentID == student).Select(e => e.Student);
 
-            if (students == null) return Ok(students);
-            if (student != null && !students.Any()) StatusCode(System.Net.HttpStatusCode.NoContent);
+            if (student == null) return Ok(students);
+            if (student.HasValue && !students.Any()) return StatusCode(System.Net.HttpStatusCode.NoContent);
 
             return Ok(students.First());
         }
