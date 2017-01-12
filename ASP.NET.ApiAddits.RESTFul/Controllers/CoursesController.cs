@@ -17,10 +17,10 @@ namespace ASP.NET.ApiAddits.RESTFul.Controllers
             this.db = new SchoolContext();
         }
 
-        public IHttpActionResult Get()
-        {
-            return Ok(db.Courses);
-        }
+        //public IHttpActionResult Get()
+        //{
+        //    return Ok(db.Courses);
+        //}
 
         public IHttpActionResult Get(int id)
         {
@@ -40,14 +40,14 @@ namespace ASP.NET.ApiAddits.RESTFul.Controllers
                 .Where(e => student == null || e.StudentID == student).Select(e => e.Student);
 
             if (student == null) return Ok(students);
-            if (student.HasValue && !students.Any()) return StatusCode(System.Net.HttpStatusCode.NoContent);
+            if (!students.Any()) return StatusCode(System.Net.HttpStatusCode.NotFound);
 
             return Ok(students.First());
         }
 
         #region - Pagging -
 
-        //public IHttpActionResult Get(UInt16 page = 1, UInt16 pageSize = 5)
+        //public IHttpActionResult Get(UInt16 page = 1, UInt16 pageSize = 3)
         //{
         //    var courses = db.Courses.OrderBy(c => c.CourseID);
         //    var count = db.Courses.Count();
@@ -58,14 +58,14 @@ namespace ASP.NET.ApiAddits.RESTFul.Controllers
         #endregion
 
         #region - Paging, OrderBY, Where and Select
-        //public IHttpActionResult Get(UInt16 page = 1, UInt16 pageSize = 5, string orderby = "courseid", string where = null, string select = null)
-        //{
-        //    var query = db.Courses.AsQueryable().ApplyWhere(where).ApplySort(orderby);
-        //    var count = query.Count();
+        public IHttpActionResult Get(UInt16 page = 1, UInt16 pageSize = 3, string orderby = "courseid", string where = null, string select = null)
+        {
+            var query = db.Courses.AsQueryable().ApplyWhere(where).ApplySort(orderby);
+            var count = query.Count();
 
-        //    return Ok(query.Skip(pageSize * (page - 1)).Take(pageSize).ApplySelect(select))
-        //        .AddPagination("DefaultApi", new PageInfo { Page = page, PageSize = pageSize, Count = count });
-        //}
+            return Ok(query.Skip(pageSize * (page - 1)).Take(pageSize).ApplySelect(select))
+                .AddPagination("DefaultApi", new PageInfo { Page = page, PageSize = pageSize, Count = count });
+        }
         #endregion
     }
 }

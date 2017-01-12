@@ -13,6 +13,7 @@ namespace ASP.NET.ApiAddits.MessagesHandler.Controllers
 
         public IHttpActionResult Put(int id, [FromBody]Student student)
         {
+            student.ID = id;
             return Ok(student);
         }
     }

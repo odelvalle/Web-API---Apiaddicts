@@ -17,7 +17,9 @@ namespace ASP.NET.ApiAddits.MessagesHandler.Handlers
         protected override Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            if (!ValidateKey(request))
+            var query = request.RequestUri.ParseQueryString();
+
+            if (!(query["key"] == Key))
             {
                 var response = new HttpResponseMessage(HttpStatusCode.Forbidden);
                 var tsc = new TaskCompletionSource<HttpResponseMessage>();
@@ -27,12 +29,6 @@ namespace ASP.NET.ApiAddits.MessagesHandler.Handlers
             }
 
             return base.SendAsync(request, cancellationToken);
-        }
-
-        private bool ValidateKey(HttpRequestMessage message)
-        {
-            var query = message.RequestUri.ParseQueryString();
-            return (query["key"] == Key);
         }
     }
 }

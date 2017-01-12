@@ -61,15 +61,15 @@ namespace ASP.NET.ApiAddits.RESTFul.Controllers
             return Ok(student);
         }
 
-        public IHttpActionResult Delete(int id)
+        public void  Delete(int id)
         {
             var student = db.Students.SingleOrDefault(s => s.ID == id);
-            if (student == null) return NotFound();
+            if (student == null) return;
 
             db.Students.Remove(student);
             db.SaveChanges();
 
-            return StatusCode(System.Net.HttpStatusCode.NoContent);
+            return;
         }
     }
 }
