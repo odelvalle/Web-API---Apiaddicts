@@ -1,8 +1,14 @@
-﻿using ContosoUniversity.DAL;
+﻿using ASP.NET.ApiAddits.RESTFul.Extensions;
+using ContosoUniversity.DAL;
+using ContosoUniversity.Models;
 using System;
+using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
+using System.Reflection;
 using System.Web.Http;
 using System.Web.Http.OData;
+using System.Web.Http.OData.Query;
 using static ASP.NET.ApiAddits.RESTFul.Extensions.HttpActionResultExtensions;
 
 namespace ASP.NET.ApiAddits.RESTFul.Controllers
@@ -16,27 +22,9 @@ namespace ASP.NET.ApiAddits.RESTFul.Controllers
             this.db = new SchoolContext();
         }
 
-        public IHttpActionResult Get(UInt16 page = 1, UInt16 pageSize = 5)
-        {
-            var courses = db.Courses;
-            var count = db.Courses.Count();
-
-            var response = Ok(courses.OrderBy(c => c.CourseID).Skip(pageSize * (page - 1)).Take(pageSize));
-            return response.AddPagination("DefaultApi", new PageInfo { Page = page, PageSize = pageSize, Count = count });
-        }
-
-        //public IHttpActionResult Get(ODataQueryOptions<Course> options)
+        //public IHttpActionResult Get()
         //{
-        //    options.Validate(WebApiConfig.ODataSettings);
-        //    var settings = new ODataQuerySettings()
-        //    {
-        //        PageSize = 2
-        //    };
-
-        //    var courses = db.Courses.AsQueryable();
-        //    var query = (IQueryable<Course>)options.ApplyTo(courses, settings);
-
-        //    return Ok(new PageResult<Course>(query, Request.ODataProperties().NextLink, courses.Count()));
+        //    return Ok(db.Courses);
         //}
 
         public IHttpActionResult Get(int id)
@@ -60,6 +48,26 @@ namespace ASP.NET.ApiAddits.RESTFul.Controllers
             if (student.HasValue && !students.Any()) return StatusCode(System.Net.HttpStatusCode.NoContent);
 
             return Ok(students.First());
+        }
+
+        #region - Pagging -
+        //public IHttpActionResult Get(UInt16 page = 1, UInt16 pageSize = 5)
+        //{
+        //    var courses = db.Courses.OrderBy(c => c.CourseID);
+        //    var count = db.Courses.Count();
+
+        //    return Ok(courses.Skip(pageSize * (page - 1)).Take(pageSize))
+        //        .AddPagination("DefaultApi", new PageInfo { Page = page, PageSize = pageSize, Count = count });
+        //}
+        #endregion
+
+        public IHttpActionResult Get(UInt16 page = 1, UInt16 pageSize = 5, string orderby = "courseid", string where = null, string select = null)
+        {
+            var query = db.Courses.AsQueryable().ApplyWhere(where).ApplySort(orderby);
+            var count = query.Count();
+
+            return Ok(query.Skip(pageSize * (page - 1)).Take(pageSize).ApplySelect(select))
+                .AddPagination("DefaultApi", new PageInfo { Page = page, PageSize = pageSize, Count = count });
         }
     }
 }

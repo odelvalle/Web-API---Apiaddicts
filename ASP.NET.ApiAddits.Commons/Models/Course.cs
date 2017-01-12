@@ -9,7 +9,7 @@ namespace ContosoUniversity.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Display(Name = "Number")]
-        [JsonProperty(PropertyName = "id")]
+        //[JsonProperty(PropertyName = "id")]
         public int CourseID { get; set; }
 
         [StringLength(50, MinimumLength = 3)]

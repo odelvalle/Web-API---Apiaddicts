@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Web;
@@ -25,25 +26,27 @@ namespace ASP.NET.ApiAddits.RESTFul.Extensions
             var totalPages = (int)Math.Ceiling((double)pageInfo.Count / pageInfo.PageSize);
             if (totalPages > 1)
             {
-                var routeValues = HttpContext.Current.Request.QueryString.ToRouteValues();
+                var routeValues = HttpContext.Current.Request.QueryString.ToDictionary();
 
                 if (pageInfo.Page > 1)
                 {
-                    result = result.WithRouteLink(routeName, routeValues, "previous", $"page:{pageInfo.Previous}");
+                    routeValues["page"] = pageInfo.Previous;
+                    result = result.WithRouteLink(routeName, new RouteValueDictionary(routeValues), "previous", $"page:{pageInfo.Previous}");
                 }
 
                 if (pageInfo.Page < totalPages)
                 {
-                    result = result.WithRouteLink(routeName, routeValues, "next", $"page: {pageInfo.Next}");
+                    routeValues["page"] = pageInfo.Next;
+                    result = result.WithRouteLink(routeName, new RouteValueDictionary(routeValues), "next", $"page: {pageInfo.Next}");
                 }
             }
 
             return result;
         }
 
-        public static RouteValueDictionary ToRouteValues(this NameValueCollection col)
+        public static IDictionary<string, object> ToDictionary(this NameValueCollection col)
         {
-            var values = new RouteValueDictionary();
+            var values = new Dictionary<string, object>();
             foreach (string key in col.Cast<string>())
             {
                 values[key] = col[key];

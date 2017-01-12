@@ -33,12 +33,13 @@ namespace ASP.NET.ApiAddits.RESTFul
         #region - OData settings - 
         public static ODataValidationSettings ODataSettings => new ODataValidationSettings
         {
+            
             AllowedArithmeticOperators = AllowedArithmeticOperators.All,
             AllowedFunctions = AllowedFunctions.AllFunctions,
             AllowedLogicalOperators = AllowedLogicalOperators.All,
             AllowedQueryOptions = AllowedQueryOptions.Filter
-                                        | AllowedQueryOptions.OrderBy
-                                        | AllowedQueryOptions.Select
+                                | AllowedQueryOptions.OrderBy
+                                | AllowedQueryOptions.Select
         };
         #endregion
     }
