@@ -3,10 +3,10 @@
 Código fuente utilizado en el evento sobre ASP.NET Web API en APIAddits
 https://www.meetup.com/es-ES/ApiAddicts/events/236417681/
 
-La presentación te la puedes descargar de aquí:
+Presentación:
 https://docs.google.com/presentation/d/1emOBagcUpeerF5vab_wkXNSBX1lyfRmt5UbGw5DtsOs/edit?usp=sharing 
 
-La colección postman usada en el evento, te la puedes descargar de aquí:
+Colección postman:
 https://www.getpostman.com/collections/076584fbb821cd6d6155
 
 Enjoy!
