@@ -5,7 +5,7 @@ namespace ASP.NET.ApiAddits.Filters.Controllers
 {
     public class StudentsController : ApiController
     {
-        //[AuthorFilter]
+        [AuthorFilter]
         public IHttpActionResult Get()
         {
             return Ok();

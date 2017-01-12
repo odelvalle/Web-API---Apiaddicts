@@ -17,7 +17,7 @@ namespace ASP.NET.ApiAddits.Filters
             );
 
             // Filters
-            config.Filters.Add(new AuthorFilter());
+            //config.Filters.Add(new AuthorFilter());
         }
     }
 }

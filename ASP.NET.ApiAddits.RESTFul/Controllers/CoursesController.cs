@@ -17,11 +17,40 @@ namespace ASP.NET.ApiAddits.RESTFul.Controllers
             this.db = new SchoolContext();
         }
 
-        //public IHttpActionResult Get()
-        //{
-        //    return Ok(db.Courses);
-        //}
+        public IHttpActionResult Get()
+        {
+            return Ok(db.Courses);
+        }
 
+        #region - Pagging -
+
+        [Route("api/v2.0/courses", Name = "Default20")]
+        public IHttpActionResult Get(UInt16 page = 1, UInt16 pageSize = 3)
+        {
+            var courses = db.Courses.OrderBy(c => c.CourseID);
+            var count = db.Courses.Count();
+
+            return Ok(courses.Skip(pageSize * (page - 1)).Take(pageSize))
+                .AddPagination("Default20", new PageInfo { Page = page, PageSize = pageSize, Count = count });
+        }
+        #endregion
+
+        #region - Paging, OrderBY, Where and Select
+        [CacheFilter(QueryStringParamsInCacheKey ="*")]
+        [Route("api/v3.0/courses", Name = "Default30")]
+        public IHttpActionResult Get(UInt16 page = 1, UInt16 pageSize = 3, string orderby = "courseid", string where = null, string select = null)
+        {
+            var query = db.Courses.AsQueryable().ApplyWhere(where).ApplySort(orderby);
+            var count = query.Count();
+
+            return Ok(query.Skip(pageSize * (page - 1)).Take(pageSize).ApplySelect(select))
+                .AddPagination("Default30", new PageInfo { Page = page, PageSize = pageSize, Count = count });
+        }
+        #endregion
+
+        [Route("api/courses/{id}")]
+        [Route("api/v2.0/courses/{id}")]
+        [Route("api/v3.0/courses/{id}")]
         public IHttpActionResult Get(int id)
         {
             var course = db.Courses.SingleOrDefault(c => c.CourseID == id);
@@ -32,6 +61,8 @@ namespace ASP.NET.ApiAddits.RESTFul.Controllers
 
         [HttpGet]
         [Route("api/courses/{id}/students/{student:int?}")]
+        [Route("api/v2.0/courses/{id}/students/{student:int?}")]
+        [Route("api/v3.0/courses/{id}/students/{student:int?}")]
         public IHttpActionResult StudentsInCourse(int id, int? student = null)
         {
             var students = db.Courses.Include("Enrollments.Student")
@@ -44,28 +75,5 @@ namespace ASP.NET.ApiAddits.RESTFul.Controllers
 
             return Ok(students.First());
         }
-
-        #region - Pagging -
-
-        //public IHttpActionResult Get(UInt16 page = 1, UInt16 pageSize = 3)
-        //{
-        //    var courses = db.Courses.OrderBy(c => c.CourseID);
-        //    var count = db.Courses.Count();
-
-        //    return Ok(courses.Skip(pageSize * (page - 1)).Take(pageSize))
-        //        .AddPagination("DefaultApi", new PageInfo { Page = page, PageSize = pageSize, Count = count });
-        //}
-        #endregion
-
-        #region - Paging, OrderBY, Where and Select
-        public IHttpActionResult Get(UInt16 page = 1, UInt16 pageSize = 3, string orderby = "courseid", string where = null, string select = null)
-        {
-            var query = db.Courses.AsQueryable().ApplyWhere(where).ApplySort(orderby);
-            var count = query.Count();
-
-            return Ok(query.Skip(pageSize * (page - 1)).Take(pageSize).ApplySelect(select))
-                .AddPagination("DefaultApi", new PageInfo { Page = page, PageSize = pageSize, Count = count });
-        }
-        #endregion
     }
 }
